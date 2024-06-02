@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamasutra Wheel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Kamasutra Wheel</h1>
+        <div class="wheel-container">
+            <canvas id="wheel" width="500" height="500"></canvas>
+            <div id="arrow"></div>
+        </div>
+        <div class="controls">
+            <label for="intensity">Select Intensity:</label>
+            <select id="intensity">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            
+            <label for="moment">Select Moment:</label>
+            <select id="moment">
+                <option value="foreplay">Foreplay</option>
+                <option value="intercourse">Intercourse</option>
+                <option value="climax">Climax</option>
+            </select>
+
+            <button id="spinButton">Spin the Wheel</button>
+        </div>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
