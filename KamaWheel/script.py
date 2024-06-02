@@ -35,7 +35,8 @@ def get_penetration_level(url):
                     if penetration_url in PENETRATION_LEVEL_URLS.values():
                         # Extract the penetration level from the URL
                         penetration_level = [k for k, v in PENETRATION_LEVEL_URLS.items() if v == penetration_url][0]
-                        return penetration_level
+                        name = soup.find('h1', class_='entry-title').text
+                        return penetration_level, name
         return None
     except requests.RequestException as e:
         print(f"Error fetching {url}: {e}")
@@ -57,9 +58,9 @@ def get_urls_from_page(url):
                 href = link['href']
                 # Only keep URLs that match the pattern
                 if re.match(r'^https://sexpositions.club/positions/\d+\.html$', href):
-                    penetration_level = get_penetration_level(href)
-                    print(f"URL: {href}, Penetration Level: {penetration_level}")
-                    urls.add((href, penetration_level))
+                    penetration_level, name = get_penetration_level(href)
+                    print(f"URL: {href}, Penetration Level: {penetration_level}, Name: {name}")
+                    urls.add((href, penetration_level, name))
             
         return list(urls), soup
     except requests.RequestException as e:
@@ -96,8 +97,8 @@ if __name__ == "__main__":
     # Print all collected URLs with penetration levels
     for level, urls_list in all_urls.items():
         print(f"URLs from level '{level}', found {len(urls_list)}:")
-        for url, penetration_level in urls_list:
-            print(f"URL: {url}, Penetration Level: {penetration_level}")
+        for url, penetration_level, name in urls_list:
+            print(f"URL: {url}, Penetration Level: {penetration_level}, Name: {name}")
 
 	# Write the collected URLs to a JSON file
     with open('sex_positions_urls.json', 'w') as json_file:
